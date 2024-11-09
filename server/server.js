@@ -58,9 +58,9 @@ app.use((req,res,next)=>{
 });
 
 
-app.use('/login',function(req,res,next){
+app.use('/',function(req,res,next){
   console.log(req.path)
-  if(req.path==='/login'){
+  if(req.path==='/'){
     let tok = req.query.token;
     console.log("query ",tok)
     console.log("cookies  ",req.cookies)
@@ -253,88 +253,3 @@ app.listen(port,'0.0.0.0',()=>{
     console.log(`server running on port ${port}`);
 })
 
-
-
-const data = {
-  Basic_Details: {
-    Name: 'NARAYANPUR MVS W/S',
-    'Scheme ID': '123',
-    Division: 'U.S. NAGAR',
-    District: 'U.S. NAGAR',
-    Block: 'GADARPUR',
-    Panchayat: 'NARAYANPUR',
-    Village: 'NARAYANPUR AND MUKUNDPUR',
-    Habitation: ''
-  },
-  Scheme_Details: {
-    'DWSM Approved Date': '23-11-2021',
-    'No of FHTC': '409',
-    'Total Cost': '231.57 lacs',
-    'State Share': '204.255',
-    'Center Share': '22.695',
-    'Handed Over on (Date)': '',
-    'Work Order Date': '30-09-2022',
-    'Cost of Work Order': '191.00 lacs (gst extra)',
-    'Completion Date of Scheme': '',
-    'Final Cost of Scheme (Payment)': '',
-    'Contracter Name': 'M/S Sunil Kumar Gaur',
-    'Contracter Address': 'Asheervad sadan, Tilak Nagar Phase-2',
-    'Completion Date': '31-03-2023'
-  },
-  Field_Functionary: {
-    'About Jal Mitra/PTC': { Name: 'Diwas Sati', 'Phone No': '07453072456' },
-    'About VWSC': { President: [Object], Secretary: [Object] },
-    'About Division Office': { EE: [Object], AE: [Object], JE: [Object] }
-  },
-  Water_Quality: {
-    'Date of Testing': '',
-    PH: '',
-    TDS: '',
-    Iron: '',
-    Turbidity: '',
-    Florid: '',
-    'Residual Chlorine': '',
-    Chloride: '',
-    Nitrate: '',
-    'Bacteriological Test': ''
-  },
-  Scheme_Component: [
-    {
-      Component: 'Submersible Pump',
-      Specification: 'HP -,RPM -, Head -400, LPM-60 mtr head'
-    },
-    {
-      Component: 'Bore',
-      Specification: 'Bore Size- 600 mm, Drilling Method- reverse, Casing Size- 300mm, Column Pipe dia- 100 mm, Column Pipe Length- 45m, Bore Depth- 193m, Geo Coordinate- , '
-    },
-    {
-      Component: 'OHT',
-      Specification: 'Capacity - 150 kLitre, Stazing - 16m'
-    },
-    { Component: 'Control Panel', Specification: 'SCADA' },
-    { Component: 'Servo Stabilizer', Specification: '20 KVA' },
-    { Component: 'Transformer', Specification: 'Servo Type' },
-    {
-      Component: 'Chlorine Doser Pump',
-      Specification: '4LPH at 5.5Kg/cm2'
-    },
-    {
-      Component: 'Centrifugal Pump and Motor',
-      Specification: 'Saft Dia- ,Blade Number -  ,  Blade Thickness- , Motor HP- , Pump Head - , Pump Disharge - ,  '   
-    },
-    {
-      Component: 'Supply Main / Rising Main',
-      Specification: 'length - 31m, Dia - 150mm'
-    },
-    {
-      Component: 'Distribution Main',
-      Specification: 'length -  7603m, Dia - 63mm-160mm'
-    }
-  ],
-  Scheme_Layout: { PDF: '', Link: '' },
-  Grievance_Contact: {
-    Whatsapp: '9720678657',
-    Phone: '9720678657',
-    Email: 'satidiwas@gmail.com'
-  }
-}
