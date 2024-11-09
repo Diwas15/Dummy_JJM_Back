@@ -1,0 +1,384 @@
+
+.schemeForm{
+  background: linear-gradient(rgba(255, 255, 255, 0.249),rgba(0, 187, 255, 0.221)), url('https://jjmbrain.in/img/background-grievance.svg') no-repeat ;
+  background-color: white;
+  background-attachment: fixed;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0rem 0 2rem 0;
+
+}
+
+.form_header{
+  width: 100%;
+  height: 4rem;
+  overflow: hidden;
+  margin-bottom: 2rem;
+  display: flex;
+  justify-content: space-between;
+  padding: .5rem 2rem;
+}
+
+.pop_up{
+  width: 40%;
+  height: 40%;
+  position: fixed;
+  background-color: rgba(0, 166, 255, 0.763);
+  border: 1px solid black;
+  top:30%;
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+}
+
+.show{
+  display: flex;
+}
+
+.pop_up input{
+  height: min-content;
+  width: min-content;
+}
+
+.form_header button{
+  height: fit-content;
+  color: white;
+  background-color: red;
+  padding: .5rem;
+  font-size: 14px;
+}
+
+.form_box{
+  /* border: 1px solid red; */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  background-color: rgba(255, 255, 255, 0.452);
+  width: 80%;
+  height: fit-content;
+  padding: 4rem;
+}
+
+.form_box form{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.submit_btn{
+  width: fit-content;
+  margin: auto;
+  padding: .5rem;
+  background-color: rgb(2, 196, 2);
+  border: none;
+  border-radius: 5px;
+  color: white;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.section{
+  /* border: 1px solid red; */
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  width: 100%;
+  margin: 2rem 0 4rem 0;
+  justify-content: left;
+
+
+}
+.section_box{
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  justify-content: left;
+  margin-bottom: 2rem;
+}
+.section_box p{
+  margin-left: auto;
+  font-size: 12px;
+  color: gray;
+}
+
+.section button{
+  width: min-content;
+  min-width: 5rem;
+  padding: .5rem;
+  background-color: rgb(58, 173, 222);
+  border: none;
+  border-radius: .5rem;
+  margin-right: 1rem;
+  color: white;
+}
+
+.input_box{
+  /* border: 1px solid red; */
+  display: flex;
+  flex-direction: column;
+
+  width: 40%;
+  margin: 1rem auto 0 0;
+}
+
+label{
+  color: #474747;
+  font-weight: bold;
+  margin-bottom: .5rem;
+
+}
+input{
+  outline: none;
+  padding: .6rem;
+  border: 1px solid black;
+  border-radius: .5rem;
+  border-color: #8a8a8a;
+  color: #474747;
+  font-size: 15px;
+}
+
+.section h3{
+  margin: 1rem 0;
+}
+
+
+/* ---------------------------------------------grievance form--------------------------------------------- */
+
+.grievanceForm{
+  background: url('https://jjmbrain.in/img/background-grievance.svg');
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  min-height: 100vh;
+  padding: 0 8rem 4rem 8rem;
+
+}
+
+.grievance_header{
+  display: flex;
+  align-items: center;
+  color: rgb(0, 157, 255);
+  justify-content: left;
+  width: 100%;
+}
+.grievance_header img{
+  scale: .6;
+}
+.grievance_header h1{
+  position: relative;
+  left:-20px;
+  min-width: 9rem;
+}
+.grievanceForm form{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap:1rem;
+  padding: 2rem 1.5rem ;
+  border-radius: .5rem;
+  background-color: rgba(255, 255, 255, 0.653);
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+.grievance_section{
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  margin-bottom: 2rem;
+}
+
+.grievance_section>p{
+  color: #0f4bfd;
+  background-color: #5982fc2f;
+  width: 100%;
+  padding: .3rem .5rem;
+  border-radius: 7px;
+  font-size: 18px;
+  margin-bottom: 1rem;
+}
+
+.grievanceElement{
+  display: flex;
+  width: 100%;
+  text-align: left;
+  padding: .3rem 0;
+  flex-direction: column;
+  max-width: 45%;
+  
+}
+
+.grievanceElement input[type="text"]{
+  padding: .5rem 1rem;
+  font-size: 16px;
+  color: rgb(75, 75, 75);
+}
+
+.grievanceElement input[type="text"]:focus{
+  border: 2px solid #0f4bfd;
+  outline: none;
+  border-radius: .5rem;
+}
+
+#Description{
+  border: 1px solid gray;
+  outline: none;
+  border-radius: .5rem;
+  padding:.5rem 1rem;
+  font-size: 16px;
+}
+
+#Description:focus{
+  border: 2px solid #0f4bfd;
+}
+
+.elementSelector{
+  display: flex;
+  width: 25%;
+  text-align: left;
+  padding: .3rem 0;
+  flex-direction: column;
+  padding-left:1rem;
+  border:2px solid gray;
+  margin:0 1rem 1rem 0;
+  border-radius:.5rem;
+  /* max-width:13rem; */
+}
+
+.select{
+  border: 2px solid blue;
+  color: blue;
+}
+
+
+.options{
+  display: flex;
+  flex-direction: column;
+  padding: .5rem 1rem .5rem 0;
+  margin-top: 2rem;
+  /* border: 1px solid rgb(180, 180, 180);
+  border-radius: .5rem; */
+  width: 40%;
+}
+.option{
+  display:flex; 
+  height:'100%';
+  justify-content:left;
+  margin:.3rem 0;
+  font-size: 16px;
+  align-items: center;
+}
+
+.option label{
+  height:100%; 
+  width:100% ;
+  align-content:center; 
+  font-weight:400;
+  border:1px solid gray;
+  border-radius: .5rem;
+  padding: .5rem 1rem;
+}
+
+.option input[type='radio']{
+  margin-right: 1rem;
+}
+
+#grievanceSubmit_btn{
+  width: 20%;
+  font-size: 16px;
+  padding: .5rem;
+  background-color: #122186;
+  color: white;
+  margin: auto;
+}
+/* ------------------------------------------------media queries------------------------------------------ */
+
+@media only screen and (max-width:940px){
+  .form_box{
+    font-size: 18px !important;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    background-color: rgba(255, 255, 255, 0.452);
+    width: 90%;
+    height: fit-content;
+    padding: 2rem;
+    font-size: 16px;
+  }
+
+  .form_box form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+  }
+  .form_box h2{
+    font-size: 20px;
+  }
+  .form_box>h2{
+    text-align: center;
+    width: 100%;
+  }
+
+  .input_box{
+    /* border: 1px solid red; */
+    display: flex;
+    flex-direction: column;
+
+    width: 100%;
+    margin: 1rem auto 0 0;
+  }
+  .section button{
+    font-size: 16px;
+    font-weight: 699;
+    min-width: 6rem;
+  }
+  .submit_btn{
+    font-size: 16px;
+    min-width: 6rem;
+
+  }
+
+}
+
+
+/*  ---------------------------media queries for grievance form-------------------------------------- */
+
+@media only screen and (max-width:940px){
+.grievanceForm{
+  padding: 0 1rem 4rem 1rem;
+}
+.grievance_header{
+  justify-content: center;
+  width: 100%;
+}
+
+.grievance_header img{
+  scale: .5;
+}
+
+.grievanceElement{
+  max-width: 100%;
+}
+
+.element{
+  max-width: 100%;
+}
+
+.elementSelector{
+  width: 100% !important;
+}
+
+.options{
+  width: 100%;
+}
+}
+
+
+
