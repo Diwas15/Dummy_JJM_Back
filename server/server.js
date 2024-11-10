@@ -75,29 +75,15 @@ app.use('/',function(req,res,next){
       res.status(401).send("TOKEN EXPIRED LOGIN AGAIN");
     }
     app.use(express.static(path.join(__dirname,"../build"),{setHeaders:function(res,path,stat){res.set('Set-Cookie', `token=${tok};HttpOnly`), res.set('Cache-Control','max-age=0, must-revalidate')}}));
-    next();
+    
   }
-   
+  next();
   
 })
 
 
 
-
-
-
-
-
-
-
-
 /////////////////////////////////////////////////routes/////////////////////////////////////////////////////
-
-
-app.get('/res',(req,res)=>{
-  jwt.verify(req.cookies.token,publicKey);
-  res.status(404).send(req.cookies);
-})
 
 
 
@@ -127,26 +113,41 @@ app.post('/verifyToken',(req,res)=>{
 app.post('/addScheme',(req,res)=>{
   console.log(req.body);
   let scheme = req.body;
-  let ID = scheme.Basic_Details['Scheme ID'];
-  if(qr.exists({schemeID:ID})) return res.status(400).send();
-  schemeSchema.create({schemeID:ID, data:scheme}).then((result)=>{
-    console.log(result);
-    fetch(`http://api.qrserver.com/v1/create-qr-code/?data=http://localhost:3000/schemes?schemeID=${ID}&size=150x150`,{
-        method:'GET',
-      
-    }).then((response)=>response.arrayBuffer().then((dat)=>{
-        // let b64 = dat.toString('base64');
-        var base64String = btoa(String.fromCharCode.apply(null, new Uint8Array(dat)));
-        qr.create({schemeID:ID,Name:scheme.Basic_Details.Name,data:base64String}).then((data)=>{
-          return res.status(201).send();
-        }).catch((err)=>{
-          console.log(err);
-          return res.status(400).send();
-        })
-    }));
+  let id = scheme.Basic_Details['Scheme ID'];
+  console.log(id);
+  
+  // if(qr.exists({schemeID:id})){
+  //   console.log("pehle se hai");
+  //   return res.status(400).send();
+  // };
+  qr.find({schemeID:id}).then((data)=>{
+    console.log(data);
+    if(data.length != 0){
+      console.log("pehle se hai");
+      return res.status(400).send();
+    }
+  
+    schemeSchema.create({schemeID:id, data:scheme}).then((result)=>{
+      console.log(result);
+      fetch(`http://api.qrserver.com/v1/create-qr-code/?data=http://localhost:3000/schemes?schemeID=${id}&size=150x150`,{
+          method:'GET',
+        
+      }).then((response)=>response.arrayBuffer().then((dat)=>{
+          // let b64 = dat.toString('base64');
+          var base64String = btoa(String.fromCharCode.apply(null, new Uint8Array(dat)));
+          qr.create({schemeID:id,Name:scheme.Basic_Details.Name,data:base64String}).then((data)=>{
+            return res.status(201).send();
+          }).catch((err)=>{
+            console.log(err);
+            return res.status(401).send();
+          })
+      }));
+    }).catch((err)=>{
+      console.log(err);
+        return res.status(401).send();
+    })
   }).catch((err)=>{
-    console.log(err);
-      return res.status(401).send();
+    res.status(500).send();
   })
 })
 

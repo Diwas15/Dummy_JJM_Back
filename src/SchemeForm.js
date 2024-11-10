@@ -185,16 +185,18 @@ function SchemeForm() {
         "Content-Type":"application/json"
       }
     }).then((res)=>{
-      resetForm();
-      setFile('');
-      setLinks([]);
-      setList([])
-
+      
+      console.log(res)
       if(res.status == 400)
         window.alert("scheme already exists");
-      if(res.status == 201)
+      else if(res.status == 201){
         window.alert("scheme uploaded successfully");
-      if(res.status == 401)
+        resetForm();
+        setFile('');
+        setLinks([]);
+        setList([])
+      }
+      else if(res.status == 401)
         window.alert("scheme could not be uploaded. Please try again");
 
     }).catch((err)=>console.log(err));
@@ -232,23 +234,23 @@ function SchemeForm() {
                 <div className="section_box">
                   <div className="input_box">
                     <label htmlFor="Name">Name</label>
-                    <Field  className='input' type='text' name='Basic_Details.Name' required />
+                    <Field  className='input' type='text' name='Basic_Details.Name'  />
                   </div>
                   <div className="input_box">
                     <label htmlFor="Name">Scheme ID</label>
-                    <Field  className='input' type='text' name='Basic_Details.Scheme ID' required />
+                    <Field  className='input' type='text' name='Basic_Details.Scheme ID'  />
                   </div>
                   <div className="input_box">
                     <label htmlFor="Name">Division</label>
-                    <Field  className='input' type='text' name='Basic_Details.Division' required />
+                    <Field  className='input' type='text' name='Basic_Details.Division'  />
                   </div>
                   <div className="input_box">
                     <label htmlFor="Name">District</label>
-                    <Field  className='input' type='text' name='Basic_Details.District' required />
+                    <Field  className='input' type='text' name='Basic_Details.District'  />
                   </div>
                   <div className="input_box">
                     <label htmlFor="Name">Block</label>
-                    <Field  className='input' type='text' name='Basic_Details.Block' required />
+                    <Field  className='input' type='text' name='Basic_Details.Block'  />
                   </div>
                   <div className="input_box">
                     <label htmlFor="Name">Panchayat</label>
