@@ -8,6 +8,7 @@
     "@testing-library/user-event": "^13.5.0",
     "build": "^0.1.4",
     "cookie-parser": "^1.4.7",
+    "dotenv": "^16.4.5",
     "formik": "^2.4.6",
     "html2canvas": "^1.4.1",
     "install": "^0.13.0",
@@ -23,7 +24,7 @@
   "scripts": {
     "dev": "npm run build && npm start",
     "start": "npm start --prefix server",
-    "build": "npm install --prefix ./ npm install --prefix server npm run build --prefix ./ ",
+    "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },

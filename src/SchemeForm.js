@@ -197,7 +197,7 @@ function SchemeForm() {
         setList([])
       }
       else if(res.status == 401)
-        window.alert("scheme could not be uploaded. Please try again");
+        window.alert("scheme could not be uploaded. Please try again or login again");
 
     }).catch((err)=>console.log(err));
   }

@@ -13,22 +13,34 @@ import cors from 'cors';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import cookieParser from 'cookie-parser';
+import fs from 'fs';
+import dotenv from 'dotenv'
 
+dotenv.config();
 
 const app = express();
 
-const port = process.env.PORT || 8080;
+//------------------environment variables--------------------------------------------------------------//
+
+const port = process.env.PORT;
+const publicKey = process.env.PUBLIC_KEY;
+const privateKey = process.env.PRIVATE_KEY;
 
 
 const __filename = fileURLToPath(import.meta.url); // get the resolved path to the file
 const __dirname = path.dirname(__filename); 
 
-const { publicKey, privateKey } = crypto.generateKeyPairSync("rsa", {
-  modulusLength: 2048,
-  publicKeyEncoding: { type: "spki", format: "pem" },
-  privateKeyEncoding: { type: "pkcs8", format: "pem" },
-});
+// const { publicKey, privateKey } = crypto.generateKeyPairSync("rsa", {
+//   modulusLength: 2048,
+//   publicKeyEncoding: { type: "spki", format: "pem" },
+//   privateKeyEncoding: { type: "pkcs8", format: "pem" },
+// });
 
+// fs.writeFile('Output.txt', `${publicKey}     --     ${privateKey}}`, (err) => {
+
+//   // In case of a error throw err.
+//   if (err) throw err;
+// })
 
 ///////////////////////////////////////////DB CONNECTION/////////////////////////////////////////////////
 const url = "mongodb+srv://NeerajBelwal:ryPw3zFAAkprLnuX@cluster0.es0je.mongodb.net/JAL_JEEVAN_MISSION?retryWrites=true&w=majority&appName=Cluster0"
@@ -60,20 +72,22 @@ app.use((req,res,next)=>{
 
 app.use('/',function(req,res,next){
   console.log(req.path)
+  
   if(req.path==='/'){
     let tok = req.query.token;
     console.log("query ",tok)
     console.log("cookies  ",req.cookies)
+
     try{
       let decoded = jwt.verify(tok,publicKey)
       console.log("dekho             ", decoded)
     }
     catch(err){
       console.log("ye raha error ---------------------------->",err);
-      res.set("Set-Cookie","");
-      res.set("Cache-Control","no-store");
+      res.clearCookie("token");
       res.status(401).send("TOKEN EXPIRED LOGIN AGAIN");
     }
+    
     app.use(express.static(path.join(__dirname,"../build"),{setHeaders:function(res,path,stat){res.set('Set-Cookie', `token=${tok};HttpOnly`), res.set('Cache-Control','max-age=0, must-revalidate')}}));
     
   }
@@ -111,15 +125,30 @@ app.post('/verifyToken',(req,res)=>{
 
 
 app.post('/addScheme',(req,res)=>{
+  console.log(req.cookies);
+
+  try{
+    let decoded = jwt.verify(req.cookies.token,publicKey)
+    console.log("dekho             ", decoded)
+  }
+  catch(err){
+    console.log("ye raha error ---------------------------->",err);
+    // res.set("Set-Cookie","");
+    // res.set("Cache-Control","no-store");
+    res.clearCookie("token");
+    return res.status(401).send("TOKEN EXPIRED LOGIN AGAIN");
+  }
   console.log(req.body);
   let scheme = req.body;
+  console.log(req)
   let id = scheme.Basic_Details['Scheme ID'];
-  console.log(id);
   
-  // if(qr.exists({schemeID:id})){
-  //   console.log("pehle se hai");
-  //   return res.status(400).send();
-  // };
+  const encoded = jwt.sign({ID:id}, privateKey, { algorithm: 'RS256'});
+  console.log(encoded);
+
+  const decoded = jwt.verify(encoded,publicKey);
+  console.log(decoded)
+  
   qr.find({schemeID:id}).then((data)=>{
     console.log(data);
     if(data.length != 0){
@@ -129,7 +158,7 @@ app.post('/addScheme',(req,res)=>{
   
     schemeSchema.create({schemeID:id, data:scheme}).then((result)=>{
       console.log(result);
-      fetch(`http://api.qrserver.com/v1/create-qr-code/?data=http://localhost:3000/schemes?schemeID=${id}&size=150x150`,{
+      fetch(`http://api.qrserver.com/v1/create-qr-code/?data=http://localhost:3000/schemes?schemeID=${encoded}&size=150x150`,{
           method:'GET',
         
       }).then((response)=>response.arrayBuffer().then((dat)=>{
@@ -217,9 +246,10 @@ app.post('/verifyOtp',(req,res)=>{
   })
 app.get('/schemes',(req,res)=>{
     console.log(req.query);
+    let id = jwt.verify(req.query.schemeID,publicKey);
     if(req.query=={}) return res.status(400).send();
     
-    schemeSchema.find({schemeID:req.query.schemeID}).then((arr)=>{
+    schemeSchema.find({schemeID:id.ID}).then((arr)=>{
         console.log(arr);
         if(arr.length==0) return res.status(301).send();
         else return res.status(200).send(arr[0].data);
