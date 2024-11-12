@@ -69,10 +69,13 @@ app.use((req,res,next)=>{
     next();
 });
 
-
+if(fs.existsSync(path.join(__dirname,"../build"))) {
+  console.log("hai to sahi")
+  }
 app.use('/',function(req,res,next){
   console.log(req.path);
   console.log(__filename,"  ",__dirname);
+  
   
   if(req.path==='/'){
     let tok = req.query.token;
