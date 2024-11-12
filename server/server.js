@@ -81,7 +81,7 @@ app.use('/',function(req,res,next){
     let tok = req.query.token;
     console.log("query ",tok)
     console.log("cookies  ",req.cookies)
-    if(req.cookies["token"] != null)
+    if(req.cookies["token"] != null){
       try{
         let decoded = jwt.verify(tok,publicKey)
         console.log("dekho             ", decoded)
@@ -91,6 +91,7 @@ app.use('/',function(req,res,next){
         res.clearCookie("token");
         res.status(401).send("TOKEN EXPIRED LOGIN AGAIN");
       }
+    }
     
     app.use(express.static(path.join(__dirname,"../build"),{setHeaders:function(res,path,stat){res.set('Set-Cookie', `token=${tok};HttpOnly`), res.set('Cache-Control','max-age=0, must-revalidate')}}));
     
