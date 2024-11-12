@@ -178,7 +178,7 @@ function SchemeForm() {
       values.Video_Links = links;
       values.Scheme_Layout.PDF = url;
       console.log(values);
-      fetch('http://192.168.29.100:8080/addScheme',{
+      fetch(`https://dummy-jjm-back.onrender.com/addScheme`,{
       method:'POST',
       body:JSON.stringify(values),
       headers:{

@@ -5,7 +5,7 @@ import logo from './images/org.png'
 function QR() {
     const [data, setData] = useState(null);
     useEffect(()=>{
-        fetch('http://192.168.29.100:8080/getQrData',).then((res)=>res.json().then((data)=>{
+        fetch(`https://dummy-jjm-back.onrender.com/getQrData`,).then((res)=>res.json().then((data)=>{
             console.log(data);
             setData(data);
         })).catch((err)=>console.log(err));
