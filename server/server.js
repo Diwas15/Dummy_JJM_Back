@@ -71,7 +71,8 @@ app.use((req,res,next)=>{
 
 
 app.use('/',function(req,res,next){
-  console.log(req.path)
+  console.log(req.path);
+  console.log(__filename,"  ",__dirname);
   
   if(req.path==='/'){
     let tok = req.query.token;
