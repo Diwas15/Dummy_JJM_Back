@@ -83,7 +83,7 @@ app.use('/',function(req,res,next){
     let tok = req.query.token;
     console.log("query ",tok)
     console.log("cookies  ",req.cookies)
-    if(req.cookies["token"] != null){
+    if(req.cookies["token"] != undefined){
       try{
         let decoded = jwt.verify(tok,publicKey)
         console.log("dekho             ", decoded)
