@@ -69,11 +69,12 @@ app.use((req,res,next)=>{
     next();
 });
 
-if(fs.existsSync(path.join(__dirname,"../build"))) {
-  console.log("hai to sahi")
-  }
-else console.log("file nahi mili");
+
 app.use('/',function(req,res,next){
+  if(fs.existsSync(path.join(__dirname,"../build"))) {
+    console.log("hai to sahi")
+    }
+  else console.log("file nahi mili");
   console.log(req.path);
   console.log(__filename,"  ",__dirname);
   
