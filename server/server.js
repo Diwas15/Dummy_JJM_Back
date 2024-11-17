@@ -96,7 +96,7 @@ app.use('/',function(req,res,next){
       }
     }
     //app.use(express.static(path.join(__dirname,"../build"),{setHeaders:function(res,path,stat){res.set('Set-Cookie', `token=${tok};HttpsOnly;Secure=true`), res.set('Cache-Control','max-age=0, must-revalidate')}}));
-    app.use(express.static(path.join(__dirname,"../build"),{setHeaders:function(res,path,stat){res.set('Set-Cookie', `token=${tok};HttpsOnly;Secure=true`)}}));
+    app.use(express.static(path.join(__dirname,"../build"),{setHeaders:function(res,path,stat){res.set('Set-Cookie', `token="${tok}";HttpsOnly;Secure=true`)}}));
     
   }
   next();
