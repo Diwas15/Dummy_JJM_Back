@@ -81,7 +81,7 @@ app.use('/',function(req,res,next){
   
   
   if(req.path==='/'){
-    let tok = req.query.token;
+    var tok = req.query.token;
     console.log("query ",tok)
     console.log("cookies  ",req.cookies)
     if(req.cookies["token"] != undefined){
