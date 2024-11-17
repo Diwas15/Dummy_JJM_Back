@@ -64,7 +64,8 @@ app.use(bodyParser.raw({
 
 
 app.use((req,res,next)=>{
-    res.setHeader("Access-Control-Allow-Origin",process.env.NODE_ENV=='production'?"https://dummy-jjm-front.onrender.com/":'*');
+    console.log
+    res.setHeader("Access-Control-Allow-Origin",process.env.NODE_ENV=='production'?"https://dummy-jjm-front.onrender.com":'*');
     res.setHeader("Access-Control-Allow-Headers","*");
     next();
 });
