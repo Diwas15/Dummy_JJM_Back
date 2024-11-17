@@ -54,7 +54,7 @@ mongoose.connect(url).then(()=>console.log("connection successful")).catch((err)
 
 
 app.use(cookieParser());
-app.use(cors());
+app.use(cors({credentials:true}));
 app.use(express.json({ limit: '10mb' }));
 app.use(bodyParser.urlencoded({ limit: '10mb' ,extended: true }));
 app.use(bodyParser.raw({
@@ -64,7 +64,7 @@ app.use(bodyParser.raw({
 
 
 app.use((req,res,next)=>{
-    res.setHeader("Access-Control-Allow-Origin","*");
+    res.setHeader("Access-Control-Allow-Origin",process.env.NODE_ENV=='production'?"https://dummy-jjm-front.onrender.com/":'*');
     res.setHeader("Access-Control-Allow-Headers","*");
     next();
 });
@@ -94,8 +94,8 @@ app.use('/',function(req,res,next){
         res.status(401).send("TOKEN EXPIRED LOGIN AGAIN");
       }
     }
-    
-    app.use(express.static(path.join(__dirname,"../build"),{setHeaders:function(res,path,stat){res.set('Set-Cookie', `token=${tok};HttpsOnly;Secure=true`), res.set('Cache-Control','max-age=0, must-revalidate')}}));
+    //app.use(express.static(path.join(__dirname,"../build"),{setHeaders:function(res,path,stat){res.set('Set-Cookie', `token=${tok};HttpsOnly;Secure=true`), res.set('Cache-Control','max-age=0, must-revalidate')}}));
+    app.use(express.static(path.join(__dirname,"../build"),{setHeaders:function(res,path,stat){res.set('Set-Cookie', `token=${tok};HttpsOnly;Secure=true`)}}));
     
   }
   next();
