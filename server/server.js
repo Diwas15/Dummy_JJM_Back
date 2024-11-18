@@ -98,7 +98,8 @@ app.use('/',function(req,res,next){
     console.log("token dekh raha hu ", tok, "  ", typeof(tok));
     let str = `token=${tok}`+";HttpOnly;SameSite=None;Secure=true";
     console.log(str);
-    app.use(express.static(path.join(__dirname,"../build"),{setHeaders:function(res,path,stat){res.set('Set-Cookie', str)}}));
+    res.cookie('token',tok,{httpOnly:true,secure:true,sameSite:'none'})
+    app.use(express.static(path.join(__dirname,"../build")));
     
   }
   next();
