@@ -96,7 +96,7 @@ app.use('/',function(req,res,next){
       }
     }
     console.log("token dekh raha hu ", tok, "  ", typeof(tok));
-    app.use(express.static(path.join(__dirname,"../build"),{setHeaders:function(res,path,stat){res.set('Set-Cookie', `token=${tok};HttpOnly;SameSite=Lax;Secure=true`)}}));
+    app.use(express.static(path.join(__dirname,"../build"),{setHeaders:function(res,path,stat){res.set('Set-Cookie', `token=eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJjcmVkIjp7InVzZXIiOiJzYXRpZGl3YXNAZ21haWwuY29tIiwib3RwIjoiMzkxMyJ9LCJpYXQiOjE3MzE5NTA3MDcsImV4cCI6MTczMTk1MTYwN30.gSdncp2kFczIZNfC9A_Q0qn6VyRTkVVHxMc0SBCaf2L947nVa4p2uyLnD4eC6PKfWtw8MmrJLN5L-culal1QDZiqPlEQV13pH8B6GeVGvY4h4_fSs2tiGMI-3W33276E5BkO28-FC2SeD_uUNrAA0tYHV6thfjXstWVfh5FBdM5dGOsccWhpELwg5aicU09HqP5cVAVEwCVqM8xtbr2j7zLm0eEf0szvprxo2UlZIl3wx7KMgB7kytGn9r74Nr2Gqsh7nFlImIBhqMuXSA8qBzQjtU3r1O88fF8nmCMy3h9M0DofEPd2GOhSDwaFTXoM2ZOBFsvfIYtPTKcZ9X2e1A;HttpOnly;SameSite=Lax;Secure=true`)}}));
     
   }
   next();
