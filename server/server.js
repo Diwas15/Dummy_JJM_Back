@@ -96,7 +96,7 @@ app.use('/',function(req,res,next){
       }
     }
     console.log("token dekh raha hu ", tok, "  ", typeof(tok));
-    app.use(express.static(path.join(__dirname,"../build"),{setHeaders:function(res,path,stat){res.set('Set-Cookie', `token=${tok};HttpOnly;SameSite=None;Secure=true`)}}));
+    app.use(express.static(path.join(__dirname,"../build"),{setHeaders:function(res,path,stat){res.set('Set-Cookie', `token=diwas.s.s;HttpOnly;SameSite=None;Secure=true`)}}));
     
   }
   next();
