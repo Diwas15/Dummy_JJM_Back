@@ -92,12 +92,11 @@ app.use('/',function(req,res,next){
       catch(err){
         console.log("ye raha error ---------------------------->",err);
         res.clearCookie("token");
-        res.status(401).send("TOKEN EXPIRED LOGIN AGAIN");
+        return res.status(401).send("TOKEN EXPIRED LOGIN AGAIN");
       }
     }
     console.log("token dekh raha hu ", tok, "  ", typeof(tok));
     app.use(express.static(path.join(__dirname,"../build"),{setHeaders:function(res,path,stat){res.set('Set-Cookie', `token=${tok};HttpsOnly;SameSite=None;Secure=true`), res.set('Cache-Control','max-age=0, must-revalidate')}}));
-    //app.use(express.static(path.join(__dirname,"../build"),{setHeaders:function(res,path,stat){res.set('Set-Cookie', `token=${tok};HttpsOnly;Secure=true`)}}));
     
   }
   next();
