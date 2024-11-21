@@ -103,16 +103,7 @@ function SchemeForm() {
   }
 
 
-  // useEffect(()=>{
-  //   fetch('http://192.168.29.100:8080/verifyToken',{
-  //     method:"GET",
-  //     headers:{
-  //       Authentication:context.token
-  //     }
-  //   }).then((res)=>console.log(res)).catch((err)=>{
-  //     console.log(err);
-  //   })
-  // },[context.authToken]);
+ 
 
 
 
@@ -178,7 +169,7 @@ function SchemeForm() {
       values.Video_Links = links;
       values.Scheme_Layout.PDF = url;
       console.log(values);
-      fetch(`https://dummy-jjm-back.onrender.com/addScheme`,{
+      fetch(`https://dummyjjmback-production.up.railway.app/addScheme`,{
       method:'POST',
       body:JSON.stringify(values),
       headers:{
