@@ -6,7 +6,7 @@ import schemeSchema from './Schemas/schemeSchema.js';
 import qr from './Schemas/qrSchema.js'
 import authority from './Schemas/authority.js';
 import Evaluation from './Schemas/Evaluation.js';
-import token from './Schemas/token.js';
+import Complaint from './Schemas/Complaint.js';
 import nodemailer from 'nodemailer'
 import * as crypto from 'crypto';
 import cors from 'cors';
@@ -280,9 +280,45 @@ app.get("/getQrData",(req,res)=>{
   })
 })
 
-app.post('/grievance',(req,res)=>{
+app.post('/submitComplaint',(req,res)=>{
   console.log(req.body);
-  res.status(200).send();
+  let dat = req.body;
+  Complaint.create({Complainant:dat.Complainant,Complaint:dat.Complaint,Description:dat.Description, Location:dat.Location}).then((data)=>{
+    console.log(data);
+    
+    transporter.sendMail({
+      from:'Jal Sansthan Grievance <donotreply@bar.com>',
+      to:'seujshld@gmail.com',
+      cc:'satidiwas@gmail.com',
+      subject:`GRIEVANCE FROM ${data.Complainant.Name}`,
+      html:`
+        <p>The Complaint is registered with the <b>Complaint ID: <u>${data._id}</u></b>. The details of the complaint are as follows :</p>
+        <br/>
+        <b>Complainant Details</b>
+        <p>Name      : ${data.Complainant.Name}</p>
+        <p>Mobile    : ${data.Complainant['Mobile No']}</p>
+        <br/>
+        <b>Location</b>
+        <p>District  : ${data.Location.District}</p>
+        <p>Block     : ${data.Location.Block}</p>
+        <p>Panchayat : ${data.Location.Panchayat}</p>
+        <p>Village   : ${data.Location.Village}</p>
+        <br/>
+        <b>Complaint Details</b>
+        <p>Type      : ${data.Complaint.Type}</p>
+        <p>Issue     : ${data.Complaint.Issue}</p>
+        <br/>
+        <b>Description</b>
+        <p>${data.Description}</p>
+        <br/>
+        <u>Please address the complaint as early as possible.</u>
+        <br/>
+        <br/>`
+    })
+    res.status(201).send("Complaint Registered");
+  }).catch((err)=>{
+    res.status(500).send();
+  });
 })
 
 
