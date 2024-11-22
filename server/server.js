@@ -85,12 +85,11 @@ app.use('/',function(req,res,next){
     console.log("query ",tok)
     console.log("cookies  ",req.cookies)
     if(req.cookies["token"] != undefined){
+      let userCookie = req.cookies["token"];
       try{
-        let decoded = jwt.verify(tok,publicKey)
-        console.log("token dekh raha hu ", tok, "  ", typeof(tok));
-        let str = `token=${tok}`+";HttpOnly;SameSite=None;Secure=true";
-        console.log(str);
-        res.cookie('token',tok,{httpOnly:true,secure:true,sameSite:'none'})
+        let decoded = jwt.verify(userCookie,publicKey);
+        console.log("cookie check ", userCookie, "  ", typeof(userCookie));
+        //res.cookie('token',userCookie,{httpOnly:true,secure:true,sameSite:'none'})
         app.use(express.static(path.join(__dirname,"../build")));
       }
       catch(err){
@@ -99,7 +98,21 @@ app.use('/',function(req,res,next){
         return res.status(401).send("TOKEN EXPIRED LOGIN AGAIN");
       }
     }
-    
+    else{
+        try{
+          let decoded = jwt.verify(tok,publicKey);
+          console.log("query check", tok, "  ", typeof(tok));
+          let str = `token=${tok}`+";HttpOnly;SameSite=None;Secure=true";
+          console.log(str);
+          res.cookie('token',tok,{httpOnly:true,secure:true,sameSite:'none'})
+          app.use(express.static(path.join(__dirname,"../build")));
+        }
+        catch(err){
+          console.log("ye raha error ---------------------------->",err);
+          res.clearCookie("token");
+          return res.status(400).send();
+        }
+    }
     
   }
   next();
