@@ -169,7 +169,7 @@ app.post('/addScheme',(req,res)=>{
   
     schemeSchema.create({schemeID:id, data:scheme}).then((result)=>{
       console.log(result);
-      fetch(`http://api.qrserver.com/v1/create-qr-code/?data=http://localhost:3000/schemes?schemeID=${encoded}&size=150x150`,{
+      fetch(`http://api.qrserver.com/v1/create-qr-code/?data=https://jjmwebsite.netlify.app/schemes?schemeID=${encoded}&size=150x150`,{
           method:'GET',
         
       }).then((response)=>response.arrayBuffer().then((dat)=>{
