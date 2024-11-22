@@ -87,7 +87,11 @@ app.use('/',function(req,res,next){
     if(req.cookies["token"] != undefined){
       try{
         let decoded = jwt.verify(tok,publicKey)
-        console.log("dekho             ", decoded)
+        console.log("token dekh raha hu ", tok, "  ", typeof(tok));
+        let str = `token=${tok}`+";HttpOnly;SameSite=None;Secure=true";
+        console.log(str);
+        res.cookie('token',tok,{httpOnly:true,secure:true,sameSite:'none'})
+        app.use(express.static(path.join(__dirname,"../build")));
       }
       catch(err){
         console.log("ye raha error ---------------------------->",err);
@@ -95,11 +99,7 @@ app.use('/',function(req,res,next){
         return res.status(401).send("TOKEN EXPIRED LOGIN AGAIN");
       }
     }
-    console.log("token dekh raha hu ", tok, "  ", typeof(tok));
-    let str = `token=${tok}`+";HttpOnly;SameSite=None;Secure=true";
-    console.log(str);
-    res.cookie('token',tok,{httpOnly:true,secure:true,sameSite:'none'})
-    app.use(express.static(path.join(__dirname,"../build")));
+    
     
   }
   next();
