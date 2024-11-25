@@ -19,6 +19,7 @@ function SchemeForm() {
   const navigate = useNavigate();
 
   let initialValues = {
+    Dept:'',
     Basic_Details:{
       Name:"",
       "Scheme ID":'',
@@ -572,6 +573,20 @@ function SchemeForm() {
                   </div>
                 </div>
               </div>
+              <div className="section">
+                  <h2>Department</h2>
+                  <hr />
+                  <div className="section_box" style={{fontSize:'17px'}}>  
+                      <div className="input_box" style={{flexDirection:'row', alignItems:'center'}}>
+                        <Field  className='input' type='radio' name='Dept' value="Jal Sansthan"/>
+                        <label htmlFor="Name" style={{padding:'.4rem  0 0 1rem', minWidth:'6.6rem'}} >Jal Sansthan</label>              
+                      </div>
+                      <div className="input_box"  style={{flexDirection:'row', alignItems:'center'}}>
+                        <Field  className='input' type='radio' name='Dept' value="Jal Nigam"/>
+                        <label htmlFor="Name" style={{padding:'.4rem 0 0 1rem', minWidth:'6.6rem'}} >Jal Nigam</label>   
+                      </div>   
+                  </div>
+                </div>
               <button className='submit_btn' type='submit' onClick={(e)=>console.log(e.target.values)}> SUBMIT</button>
             </Form>
           </Formik>
