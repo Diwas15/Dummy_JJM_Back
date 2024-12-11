@@ -242,21 +242,24 @@ app.get('/getOtp',(req,res)=>{
     if(err){
       return res.status(500).send();
     }
-  });
-  transporter.sendMail({
-      from: '"Jal Sansthan"', // sender address
-      to: req.headers.user, // list of receivers
-      subject: "OTP for Verification", // Subject line, 
-      html: `<p>${otp}</p>`, // html body
-    }).then((info)=>{
-      console.log(info.messageId);
-      otpVerifyList[req.headers.user] = otp;
-      res.status(200).send();
-    })
-    .catch((err)=>{
-      console.log(err);
-      res.status(400).send();
-    });
+    else{
+      transporter.sendMail({
+        from: '"Jal Sansthan"', // sender address
+        to: req.headers.user, // list of receivers
+        subject: "OTP for Verification", // Subject line, 
+        html: `<p>${otp}</p>`, // html body
+      }).then((info)=>{
+        console.log(info.messageId);
+        otpVerifyList[req.headers.user] = otp;
+        res.status(200).send();
+      })
+      .catch((err)=>{
+        console.log(err);
+        res.status(400).send();
+      });
+    }
+  })
+  
 })
 
 app.post('/verifyOtp',(req,res)=>{
