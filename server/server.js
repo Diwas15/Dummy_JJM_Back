@@ -238,7 +238,11 @@ app.get('/getOtp',(req,res)=>{
   console.log(req.headers.user);
   let user = req.headers.user;
   const otp = otpGenerator();
-  console.log(authority.exists({Email:user}));
+  authority.exists({Email:user}, function(err,doc){
+    if(err){
+      return res.status(500).send();
+    }
+  });
   transporter.sendMail({
       from: '"Jal Sansthan"', // sender address
       to: req.headers.user, // list of receivers
