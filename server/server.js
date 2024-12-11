@@ -222,8 +222,10 @@ const otpVerifyList = {
 
 }
 app.get('/getOtp',(req,res)=>{
-  console.log(req.headers.user)
+  console.log(req.headers.user);
+  let user = req.headers.user;
   const otp = otpGenerator();
+  console.log(authority.exists({Email:user}));
   transporter.sendMail({
       from: '"Jal Sansthan"', // sender address
       to: req.headers.user, // list of receivers
