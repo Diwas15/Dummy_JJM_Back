@@ -238,27 +238,26 @@ app.get('/getOtp',(req,res)=>{
   console.log(req.headers.user);
   let user = req.headers.user;
   const otp = otpGenerator();
-  authority.exists({Email:user}, function(err,doc){
-    if(err){
-      return res.status(500).send();
-    }
-    else{
-      transporter.sendMail({
-        from: '"Jal Sansthan"', // sender address
-        to: req.headers.user, // list of receivers
-        subject: "OTP for Verification", // Subject line, 
-        html: `<p>${otp}</p>`, // html body
-      }).then((info)=>{
-        console.log(info.messageId);
-        otpVerifyList[req.headers.user] = otp;
-        res.status(200).send();
-      })
-      .catch((err)=>{
-        console.log(err);
-        res.status(400).send();
-      });
-    }
-  })
+  let doc = authority.exists({Email:user});
+  if(doc){
+    transporter.sendMail({
+      from: '"Jal Sansthan"', // sender address
+      to: req.headers.user, // list of receivers
+      subject: "OTP for Verification", // Subject line, 
+      html: `<p>${otp}</p>`, // html body
+    }).then((info)=>{
+      console.log(info.messageId);
+      otpVerifyList[req.headers.user] = otp;
+      res.status(200).send();
+    })
+    .catch((err)=>{
+      console.log(err);
+      res.status(400).send();
+    });
+  }
+  else{
+    res.status(500).send();
+  }
   
 })
 
