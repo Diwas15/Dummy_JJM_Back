@@ -55,11 +55,11 @@ mongoose.connect(url).then(()=>console.log("connection successful")).catch((err)
 
 app.use(cookieParser());
 app.use(cors({credentials:true}));
-app.use(express.json({ limit: '10mb' }));
-app.use(bodyParser.urlencoded({ limit: '10mb' ,extended: true }));
+app.use(express.json({ limit: '100mb' }));
+app.use(bodyParser.urlencoded({ limit: '100mb' ,extended: true }));
 app.use(bodyParser.raw({
   type: 'image/jpeg',
-  limit: '10mb'
+  limit: '100mb'
 }))
 
 
