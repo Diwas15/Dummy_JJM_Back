@@ -264,7 +264,7 @@ app.get('/getOtp',(req,res)=>{
 app.post('/verifyOtp',(req,res)=>{
   if(!authority.exists({Email:req.body.user}))  return res.status(401).send();
   if(req.body.otp == otpVerifyList[req.body.user]){
-    var token = jwt.sign({cred:req.body}, privateKey, { algorithm: 'RS256', expiresIn: 15*60});
+    var token = jwt.sign({cred:req.body}, privateKey, { algorithm: 'RS256', expiresIn: 30*60});
     delete otpVerifyList[req.body.user];
     //res.cookie("evalToken",token);
     res.set('Set-Cookie', `token=${token}`);
