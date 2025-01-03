@@ -149,6 +149,16 @@ function SchemeForm() {
       temp.pop();
       setTwo([...temp]);
     }
+    else if(parent == "Water Quality"){
+      let temp = three;
+      temp.pop();
+      setThree([...temp]);
+    }
+    else if(parent == "Scheme Component"){
+      let temp = list;
+      temp.pop();
+      setList([...temp]);
+    }
     
   }
 
